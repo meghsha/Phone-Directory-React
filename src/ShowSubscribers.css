@@ -1,0 +1,60 @@
+.Tags{
+    display: flex;
+    /* row-gap: 300px; */
+}
+.spanTags{
+    margin: 30px 100px;
+    padding: 10px 8px;
+    font-size: larger;
+    font-weight: 600;
+    background-color: rgb(255, 255, 255);
+    color: rgb(39, 31, 31);
+    text-transform: uppercase;
+    box-shadow: 2px 2px 4px rgb(62, 69, 62);
+}
+#addPhone{
+    margin-left: 365px;
+}
+.spanTags:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(39, 31, 31);
+    border: none;
+    cursor: pointer;
+    transform: rotate(2deg);
+    box-shadow: 2px 2px 4px rgb(62, 69, 62);
+}
+.btn:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(39, 31, 31);
+    border: none;
+    cursor: pointer;
+    transform: rotate(2deg);
+    box-shadow: 2px 2px 4px rgb(62, 69, 62);
+}
+.spantags{
+    margin: 10px 90px;
+    padding: 5px;
+    font-size: larger;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: rgb(209, 242, 242);
+    box-shadow: 2px 2px 2px rgb(117, 139, 117);
+}
+.delete{
+    padding: 5px 8px;
+    font-size: larger;
+    font-weight: 500;
+    background-color: rgb(255, 255, 255);
+    color: rgb(39, 31, 31);
+    cursor: pointer;
+    border: none;
+    box-shadow: 2px 2px 4px rgb(62, 69, 62);
+}
+.delete:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(39, 31, 31);
+    border: none;
+    cursor: pointer;
+    transform: rotate(2deg);
+    box-shadow: 2px 2px 4px rgb(62, 69, 62);
+}
