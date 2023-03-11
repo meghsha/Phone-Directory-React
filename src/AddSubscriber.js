@@ -1,93 +1,166 @@
-import React, { Component } from "react";
-import Header from './common/Header';
+import React, { Component, useState } from "react";
+import Header from "./common/Header";
 import "./AddSubscriber.css";
-import { Link } from "react-router-dom";
+import { Form, Link, useHistory } from "react-router-dom";
+// import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 
-export default class AddSubscriber extends Component {
-   constructor(){
-    super();
-    this.state = {
-      id: 0,
-      name: "",
-      phone: ""
-    }
+export default function AddSubscriber({addSubscriberHandler}) {
+  const [addSubscriberForm, setaddSubscriberForm] = useState({
+    id: 0,
+    name: "",
+    phone: "",
+  });
+  const {name, phone} = addSubscriberForm;
+
+  const history = useHistory();
+
+    function inputChangedHandler (e){
+      let newState = addSubscriberForm;
+      newState[e.target.name] = e.target.value;
+    
+      setaddSubscriberForm({...newState});
    }
 
-   inputChangedHandler = (e) =>{
-    let newState = this.state
-    newState[e.target.name] =  e.target.value
-    this.setState(newState)
-    console.log(this.state)
-   }
-
-   onFormSubmitted = (e) =>{
+   const onFormSubmitted = (e) =>{
     e.preventDefault();
-    this.props.addSubscriberHandler(this.state)
-    this.setState({id: 0,
-      name: "",
-      phone: ""})
-    this.props.history.push("/");
+    addSubscriberHandler(addSubscriberForm)
+    setaddSubscriberForm({id: 0,
+            name: "",
+            phone: ""});
+    history.push("/");
    }
 
+  
+  return (
+    <div>
+      <Header header={"Add Subscriber"} />
+      <Link to="/">
+        <button className="btn">Back</button>
+      </Link>
 
-  render() {
+      <form className="form" onSubmit={onFormSubmitted}>
 
-    // const { name, phone } = this.state;
-    return (
-        
-      <div>
-        <Header header={"Add Subscriber"} />
-        <Link to="/" >
-            <button className="btn">Back</button>
-        </Link>
-        
-        <form className="form" onSubmit={this.onFormSubmitted.bind(this)} >
-          <div className="inputDiv">
-            <label htmlFor="name"> Name: </label>
-            <input
-              id="name"
-              type="text"
-              className="labelInput"
-              name="name"
-              placeholder="Enter your name"
-              onChange={this.inputChangedHandler}
-            ></input>
-            <br />
-            <label htmlFor="phone"> Phone:  </label>
-            <input
-              id="phone"
-              type="text"
-              className="labelInput"
-              name="phone"
-              placeholder="Enter your phone"
-              onChange={this.inputChangedHandler}
-            ></input>
-            <br />
-          </div>
 
-          <div className="subsInfo">
-            <span className="subsHeading">Subscriber Info:</span>
-            <br />
-            <span className="subsName">Name:  {this.state.name}</span>
-            <br />
-            <span className="subsPhone">Phone: {this.state.phone}</span>
-          </div>
-          <button type="submit" className="btn">
-            Add+
-          </button>
-        </form>
-      </div>
-    );
-  }
+        <div className="inputDiv">
+          <label htmlFor="name"> Name: </label>
+          <input
+            id="name"
+            type="text"
+            className="labelInput"
+            name="name"
+            placeholder="Enter your name"
+            onChange={inputChangedHandler}
+          ></input>
+          <br />
+          <label htmlFor="phone"> Phone: </label>
+          <input
+            id="phone"
+            type="text"
+            className="labelInput"
+            name="phone"
+            placeholder="Enter your phone"
+            onChange={inputChangedHandler}
+          ></input>
+          <br />
+        </div>
+
+        <div className="subsInfo">
+          <span className="subsHeading">Subscriber Info:</span>
+          <br />
+          <span className="subsName">Name: {name}</span>
+          <br />
+          <span className="subsPhone">Phone: {phone}</span>
+        </div>
+        <button type="submit" className="btn">
+          Add+
+        </button>
+      </form>
+    </div>
+  );
 }
+
+// export default class AddSubscriber extends Component {
+//    constructor(){
+//     super();
+//     this.state = {
+//       id: 0,
+//       name: "",
+//       phone: ""
+//     }
+//    }
+
+//    inputChangedHandler = (e) =>{
+//     let newState = this.state
+//     newState[e.target.name] =  e.target.value
+//     this.setState(newState)
+//     console.log(this.state)
+//    }
+
+//    onFormSubmitted = (e) =>{
+//     e.preventDefault();
+//     this.props.addSubscriberHandler(this.state)
+//     this.setState({id: 0,
+//       name: "",
+//       phone: ""})
+//     this.props.history.push("/");
+//    }
+
+//   render() {
+
+//     // const { name, phone } = this.state;
+//     return (
+
+//       <div>
+//         <Header header={"Add Subscriber"} />
+//         <Link to="/" >
+//             <button className="btn">Back</button>
+//         </Link>
+
+//         <form className="form" onSubmit={this.onFormSubmitted.bind(this)} >
+//           <div className="inputDiv">
+//             <label htmlFor="name"> Name: </label>
+//             <input
+//               id="name"
+//               type="text"
+//               className="labelInput"
+//               name="name"
+//               placeholder="Enter your name"
+//               onChange={this.inputChangedHandler}
+//             ></input>
+//             <br />
+//             <label htmlFor="phone"> Phone:  </label>
+//             <input
+//               id="phone"
+//               type="text"
+//               className="labelInput"
+//               name="phone"
+//               placeholder="Enter your phone"
+//               onChange={this.inputChangedHandler}
+//             ></input>
+//             <br />
+//           </div>
+
+//           <div className="subsInfo">
+//             <span className="subsHeading">Subscriber Info:</span>
+//             <br />
+//             <span className="subsName">Name:  {this.state.name}</span>
+//             <br />
+//             <span className="subsPhone">Phone: {this.state.phone}</span>
+//           </div>
+//           <button type="submit" className="btn">
+//             Add+
+//           </button>
+//         </form>
+//       </div>
+//     );
+//   }
+// }
 // import React, { Component } from 'react';
 // import Header from './Header';
 // import './AddSubscriber.css';
 // import { Link } from 'react-router-dom';
 
 // class AddSusbscriber extends Component {
-
-    
 
 //     render() {
 
