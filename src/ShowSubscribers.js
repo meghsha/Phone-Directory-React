@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Header from "./common/Header";
 import "./ShowSubscribers.css";
 import { Link } from "react-router-dom";
@@ -9,9 +9,13 @@ export default function ShowSubscribers({deleteSubscriberHandler, SubscriberList
   // function onDeletedClick (subscriberId) {
   //   deleteSubscriberHandler(subscriberId);
   // }
+  const numberOfSubscribers = useMemo(()=> {
+    return SubscriberList.length
+  }, [SubscriberList]);
+
   useEffect(() => {
     if(SubscriberList && SubscriberList.length){
-      document.title = 'Phone Directory - Subscribers ' + SubscriberList.length;
+      document.title = 'Phone Directory - Subscribers ' + numberOfSubscribers;
     }
     
   }, [SubscriberList])

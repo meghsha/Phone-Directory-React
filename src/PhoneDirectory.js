@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AddSubscriber from "./AddSubscriber";
 import ShowSubscribers from "./ShowSubscribers.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -16,25 +16,29 @@ export default function PhoneDirectory() {
     getData();
   }, [])
   
-
-  async function deleteSubscriber(subscriberId) {
-    // let SUBSCRIBER = SubscriberList;
-    // let subscriberIndex = 0;
-    // SUBSCRIBER.forEach(function (subscriber, index) {
-    //   if (subscriber.id === subscriberId) {
-    //     subscriberIndex = index;
-    //   }
-    // });
-    // let newSubscribers = SUBSCRIBER;
-    // const newSubscribers = SubscriberList.filter(subscriber => subscriber.id !== subscriberId);
-    // // this.setState({ subscribers: newSubscribers });
-    // setSubscriberList(newSubscribers);
-
+  const deleteSubscriber = useCallback( async (subscriberId) => {
+    
       let rawResponse = await fetch("http://localhost:7081/api/contacts/" + subscriberId, {method: "delete"} )
       let data = await rawResponse.json();
        getData();
-    
-  }
+  }, [SubscriberList]);
+  // async function deleteSubscriber(subscriberId) {
+  //   // let SUBSCRIBER = SubscriberList;
+  //   // let subscriberIndex = 0;
+  //   // SUBSCRIBER.forEach(function (subscriber, index) {
+  //   //   if (subscriber.id === subscriberId) {
+  //   //     subscriberIndex = index;
+  //   //   }
+  //   // });
+  //   // let newSubscribers = SUBSCRIBER;
+  //   // const newSubscribers = SubscriberList.filter(subscriber => subscriber.id !== subscriberId);
+  //   // // this.setState({ subscribers: newSubscribers });
+  //   // setSubscriberList(newSubscribers);
+
+  //     let rawResponse = await fetch("http://localhost:7081/api/contacts/" + subscriberId, {method: "delete"} )
+  //     let data = await rawResponse.json();
+  //      getData();
+  // }
 
   async function addSubscriber(newSubscriber) {
 
